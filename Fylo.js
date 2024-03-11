@@ -1,5 +1,22 @@
-let storedSize=0;
+
+let sizeElement;
+let remainingElement;
+let gradientElement;
+let storedSize
+let remainingSize
 let storedFiles=[];
+
+document.addEventListener('DOMContentLoaded',()=>{
+     sizeElement=document.getElementById('display-size');
+     remainingElement=document.getElementById('remaining-size');
+     gradientElement=document.querySelector('.gradient-bar');
+})
+
+window.onload=()=>{
+     storedSize=parseFloat(localStorage.getItem('storedSize'))||0;
+     remainingSize=parseFloat(localStorage.getItem('remainingSize'))||150;
+     updateUi();
+}
 
 async function UploadFiles(){
    const files=await showOpenFilePicker({multiple:true});
@@ -15,11 +32,23 @@ async function UploadFiles(){
          return;
    }
    storedSize+=sizeInMB;
-   for(const file of FormatedFiles){
-       storedFiles.push({name:file.name,size:file.size/1024/1024});
-   }
-   console.log(storedFiles);
+//    for(const file of FormatedFiles){
+//        storedFiles.push({name:file.name,size:file.size/1024/1024});
+//    }
 
+    updateUi();
+    localStorage.setItem('storedSize',storedSize);
+    localStorage.setItem('remainingSize',remainingSize-storedSize)
+}
+
+
+
+
+
+function updateUi(){
+    sizeElement.innerText=storedSize.toFixed(2);
+    remainingElement.innerText=(remainingSize-storedSize).toFixed(2);
+    gradientElement.style.width=`${(storedSize/150)*100}%`;
 }
 
 async function FormatFiles(files){ // Formating the files to a File object
@@ -30,7 +59,6 @@ async function FormatFiles(files){ // Formating the files to a File object
     return FormatedFiles;
 }
    
-
 
  function validateFiles(fileNames,sizeOfFiles){ // checking if the files are supported and if there is enough space to upload them
     let error='';

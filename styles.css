@@ -140,10 +140,11 @@ h1 span {
   background: var(--gradient-bar);
   background: var(--gradient);
   border-radius: 50px;
+  width:0%;
   filter: saturate();
-  width: 74%;
   height: 0.8rem;
   position: relative;
+  transition: width 0.5s;
 }
 .dot-container {
   position: relative;
@@ -174,7 +175,7 @@ h2 {
 /** GB left **/
 .gb-left p {
   color: var(--dark-blue);
-  font-size: 2.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: 2px;
   margin: 0;
