@@ -87,6 +87,14 @@ main {
   border-radius: 10px;
   padding: 0.8rem;
 }
+#upload-file-button{
+  background-color: var(--background-color);
+  border-radius: 10px;
+  padding: 0.8rem;
+  color:white;
+  width: 120px;
+  cursor: pointer;
+}
 
 .icon-img img {
   width: 1.4rem;
